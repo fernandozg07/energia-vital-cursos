@@ -1,118 +1,111 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Clock, Users, Award, CheckCircle, ChevronDown, ChevronUp, Play, MessageCircle } from 'lucide-react';
+import { Clock, Users, Award, CheckCircle, ChevronDown, ChevronUp, Play, MessageCircle, Star } from 'lucide-react';
+
+const coursesData = [
+  {
+    slug: 'apiterapia-completa',
+    title: 'Apiterapia Completa',
+    subtitle: 'Curso Profissionalizante',
+    description: 'Curso completo sobre o uso terapêutico dos produtos da colmeia. Aprenda sobre mel, própolis, geleia real, pólen e veneno de abelha com metodologia prática e científica.',
+    duration: '40 horas',
+    students: '450+',
+    level: 'Iniciante ao Avançado',
+    image: '/apiterapia.jpg',
+    videoUrl: 'http://googleusercontent.com/youtube.com/apiterapia-video',
+    instructor: 'Alexandre Gonçalves',
+    price: 'R$ 3.000,00',
+    installments: '12x de R$ 323,20',
+    modules: [
+      { id: 1, title: 'Apicultura Básica', lessons: ['História da Apicultura', 'Ciclo de Vida das Abelhas', 'Morfologia da Abelha'] },
+      { id: 2, title: 'História da Apiterapia', lessons: ['Antiguidade', 'Moderna'] },
+      { id: 3, title: 'Produtos Apícolas', lessons: ['Mel', 'Cera', 'Pólen', 'Pão de Abelha', 'Própolis', 'Geleia Real', 'Larva de Zangão', 'Ar da Colmeia', 'Apitoxina'] },
+      { id: 4, title: 'Anatomia', lessons: ['Visão Geral', 'Sistemas do Organismo Humano'] },
+      { id: 5, title: 'Medicina Tradicional Chinesa', lessons: ['O que é MTC?', 'Patologias na MTC', 'Teoria de Yin e Yang', 'Órgãos e Vísceras', '5 Elementos', 'Canais e Colaterais - Meridianos', 'Localização de Pontos', 'Técnica dos Pontos Alarme', 'Técnica Bei Shu', 'Técnica Tonificação e Sedação', 'Moxabustão', 'Auriculoterapia na Apiterapia', 'Diagnóstico de Língua e Pulso', 'Anamnese'] },
+      { id: 6, title: 'Enfermidades e Tratamentos', lessons: ['Dores Crônicas', 'Doenças Autoimunes', 'Doenças Emocionais', 'Disfunções Hormonais', 'Técnicas de Aplicação de Apitoxina', 'Posologia produtos'] },
+      { id: 7, title: 'Segurança e Anafilaxia', lessons: ['Molecular', 'Componentes', 'Efeitos no Organismo Humano', 'Anafilaxia', 'Segurança Clínica'] },
+      { id: 8, title: 'Ambulatório', lessons: ['Prática', 'Estudos de Casos', 'Avaliação', 'Entrega de certificados'] }
+    ],
+    benefits: [
+      'Aulas gravadas com acesso por 1 ano',
+      'Certificado de Apiterapeuta',
+      'Avaliação final (pré-requisito para entrega de certificado)',
+      'Link com vários arquivos bônus',
+    ],
+    testimonials: [
+      { name: 'Maria Silva', role: 'Terapeuta Holística', text: 'O curso transformou completamente minha prática. Hoje tenho uma nova fonte de renda com a apiterapia.', rating: 5 },
+      { name: 'João Santos', role: 'Enfermeiro', text: 'Conhecimento incrível! Alexandre é um mestre na área. Recomendo para todos.', rating: 5 }
+    ]
+  },
+  {
+    slug: 'terapia-respiratoria-combinada',
+    title: 'Terapia Respiratória Combinada (TRC)',
+    subtitle: 'Abordagem Integrativa',
+    description: 'Um método inovador que une respiração terapêutica, acupressão, moxabustão e ventosaterapia para um alívio profundo e duradouro da ansiedade e do estresse.',
+    duration: '16 horas',
+    students: '80+',
+    level: 'Iniciante',
+    image: '/trc.png',
+    videoUrl: 'http://googleusercontent.com/youtube.com/trc-video',
+    instructor: 'Alexandre Gonçalves',
+    price: 'A consultar',
+    installments: 'Fale conosco',
+    modules: [
+      { id: 1, title: 'Módulos detalhados', lessons: ['Passo a passo de como aplicar a TRC'] }
+    ],
+    benefits: [
+      'Protocolos Respiratórios específicos para insônia, ansiedade, estresse, energia, foco e concentração.',
+      'Guia e Aulas Práticas de Ventosaterapia para potencializar seus resultados e aplicar a técnica com segurança.',
+      'Guia e Aulas Práticas de Moxabustão para aumentar sua energia vital e reduzir o estresse.',
+      'Mapa de Acupuntura para localizar os pontos corretos e garantir uma aplicação eficaz.'
+    ],
+    testimonials: []
+  },
+  {
+    slug: 'ventosaterapia',
+    title: 'Ventosaterapia',
+    subtitle: 'Técnica Milenar de Cura',
+    description: 'Técnicas avançadas de ventosaterapia e cupping. Aprenda diferentes métodos e suas aplicações terapêuticas.',
+    duration: '24 horas',
+    students: '280+',
+    level: 'Iniciante',
+    image: '/ventosa.jpg',
+    videoUrl: 'http://googleusercontent.com/youtube.com/ventosa-video',
+    instructor: 'Alexandre Gonçalves',
+    price: 'A consultar',
+    installments: 'Fale conosco',
+    modules: [
+      { id: 1, title: 'Conteúdo', lessons: ['DICAS IMPORTANTES', 'SUA ORIGEM E HISTÓRIA', 'COMO FUNCIONA', 'OS TIPOS DE VENTOSAS', 'VENTOSA FIXA', 'VENTOSA DESLIZANTE', 'VENTOSA COM ACUPUNTURA', 'VENTOSA COM MOXABUSTÃO', 'VENTOSA COM SANGRIA', 'VENTOSA COM APITERAPIA', 'VENTOSA COM OZÔNIOTERAPIA', 'VENTOSA NA ESTÉTICA', 'INDICAÇÕES E BENEFÍCIOS', 'CONTRAINDICAÇÕES E EFEITOS', 'PRECAUÇÕES IMPORTANTES', 'COMO UTILIZAR', 'O TRATAMENTO SISTÊMICO QUE VISA UM EQUILÍBRIO GERAL', 'ÁREA DE TRATAMENTO', 'BIOSSEGURANÇA', 'ANAMNESE', 'NORMAS LEGAIS DE CONDUTA DOS TERAPEUTAS HOLÍSTICO'] }
+    ],
+    benefits: [],
+    testimonials: []
+  },
+];
 
 const CourseDetail = () => {
   const { slug } = useParams();
   const [expandedModule, setExpandedModule] = useState<number | null>(null);
 
-  // Mock data - em produção, isso viria de uma API ou contexto
-  const course = {
-    title: 'Apiterapia Completa',
-    subtitle: 'Curso Profissionalizante',
-    description: 'Curso completo sobre o uso terapêutico dos produtos da colmeia. Aprenda sobre mel, própolis, geleia real, pólen e veneno de abelha com metodologia prática e científica.',
-    longDescription: 'Este curso abrangente oferece uma formação completa em apiterapia, combinando conhecimento tradicional com evidências científicas modernas. Você aprenderá sobre todos os produtos da colmeia e suas aplicações terapêuticas, desde o básico até técnicas avançadas de tratamento.',
-    duration: '40 horas',
-    students: '450+',
-    level: 'Iniciante ao Avançado',
-    image: 'https://images.pexels.com/photos/1616470/pexels-photo-1616470.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Substitua por um vídeo real
-    instructor: 'Alexandre Gonçalves',
-    price: 'R$ 897,00',
-    installments: '12x de R$ 74,75',
-    modules: [
-      {
-        id: 1,
-        title: 'Introdução à Apiterapia',
-        lessons: [
-          'História e fundamentos da apiterapia',
-          'Anatomia e comportamento das abelhas',
-          'Produtos da colmeia: visão geral',
-          'Legislação e aspectos éticos'
-        ]
-      },
-      {
-        id: 2,
-        title: 'Mel Terapêutico',
-        lessons: [
-          'Propriedades medicinais do mel',
-          'Tipos de mel e suas indicações',
-          'Aplicações clínicas do mel',
-          'Dosagens e contra-indicações'
-        ]
-      },
-      {
-        id: 3,
-        title: 'Própolis e Suas Aplicações',
-        lessons: [
-          'Composição química da própolis',
-          'Propriedades antimicrobianas',
-          'Formas de apresentação e uso',
-          'Casos clínicos práticos'
-        ]
-      },
-      {
-        id: 4,
-        title: 'Geleia Real e Pólen',
-        lessons: [
-          'Produção e propriedades da geleia real',
-          'Benefícios nutricionais do pólen',
-          'Indicações terapêuticas',
-          'Protocolos de administração'
-        ]
-      },
-      {
-        id: 5,
-        title: 'Apitoxina (Veneno de Abelha)',
-        lessons: [
-          'Composição e mecanismo de ação',
-          'Técnicas de aplicação segura',
-          'Indicações e contra-indicações',
-          'Protocolos de dessensibilização'
-        ]
-      },
-      {
-        id: 6,
-        title: 'Prática Clínica',
-        lessons: [
-          'Anamnese em apiterapia',
-          'Elaboração de protocolos',
-          'Acompanhamento de casos',
-          'Aspectos legais da prática'
-        ]
-      }
-    ],
-    benefits: [
-      'Certificado de conclusão reconhecido',
-      'Material didático completo em PDF',
-      'Acesso vitalício ao conteúdo',
-      'Suporte direto com o instrutor',
-      'Grupo exclusivo de alunos',
-      'Diploma profissionalizante',
-      'Apoio para abertura de consultório',
-      'Atualizations gratuitas do conteúdo'
-    ],
-    testimonials: [
-      {
-        name: 'Maria Silva',
-        role: 'Terapeuta Holística',
-        text: 'O curso transformou completamente minha prática. Hoje tenho uma nova fonte de renda com a apiterapia.',
-        rating: 5
-      },
-      {
-        name: 'João Santos',
-        role: 'Enfermeiro',
-        text: 'Conhecimento incrível! Alexandre é um mestre na área. Recomendo para todos.',
-        rating: 5
-      }
-    ]
-  };
+  const course = coursesData.find(c => c.slug === slug);
 
-  const whatsappMessage = `Olá Alexandre! Tenho interesse no curso "${course.title}". Gostaria de saber mais informações sobre valores e como me inscrever.`;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  if (!course) {
+    return <div className="text-center py-20">Curso não encontrado.</div>;
+  }
+
+  const whatsappMessage = `Olá Alexandre! Tenho interesse no curso "${course.title}". Gostaria de saber mais informações.`;
   const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(whatsappMessage)}`;
 
+  const showPriceSection = course.price !== 'A consultar';
+  const showModulesSection = course.modules && course.modules.length > 0;
+  const showBenefitsSection = course.benefits && course.benefits.length > 0;
+  const showTestimonialsSection = course.testimonials && course.testimonials.length > 0;
+
   return (
-    <div className="bg-cream min-h-screen">
+    <div className="bg-cream min-h-screen" key={slug}>
       {/* Hero Section */}
       <section className="relative py-12 bg-moss-green/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -177,111 +170,119 @@ const CourseDetail = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-8 bg-moss-green text-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div>
-              <p className="text-cream/80 mb-2">Investimento no seu futuro profissional:</p>
-              <div className="flex items-center gap-4">
-                <span className="text-3xl font-bold">{course.price}</span>
-                <span className="text-cream/80">ou {course.installments}</span>
+      {/* Pricing Section - Condicional */}
+      {showPriceSection && (
+        <section className="py-8 bg-moss-green text-cream">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div>
+                <p className="text-cream/80 mb-2">Investimento no seu futuro profissional:</p>
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl font-bold">{course.price}</span>
+                  <span className="text-cream/80">ou {course.installments}</span>
+                </div>
               </div>
+              
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 md:mt-0 bg-mustard hover:bg-mustard/90 text-dark-brown px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105"
+              >
+                Garantir Minha Vaga
+              </a>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Course Content - Condicional */}
+      {showModulesSection && (
+        <section className="py-16 bg-cream">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
+                Conteúdo Programático
+              </h2>
+              <p className="text-lg text-dark-brown/80">
+                {course.modules.length} módulos completos com teoria e prática
+              </p>
             </div>
             
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 md:mt-0 bg-mustard hover:bg-mustard/90 text-dark-brown px-8 py-3 rounded-full font-medium transition-all duration-300 hover:shadow-lg transform hover:scale-105"
-            >
-              Garantir Minha Vaga
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Course Content */}
-      <section className="py-16 bg-cream">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
-              Conteúdo Programático
-            </h2>
-            <p className="text-lg text-dark-brown/80">
-              {course.modules.length} módulos completos com teoria e prática
-            </p>
-          </div>
-          
-          <div className="space-y-4">
-            {course.modules.map((module) => (
-              <div
-                key={module.id}
-                className="bg-cream border border-moss-green/20 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
-              >
-                <button
-                  onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-moss-green/5 transition-colors duration-200"
+            <div className="space-y-4">
+              {course.modules.map((module) => (
+                <div
+                  key={module.id}
+                  className="bg-cream border border-moss-green/20 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <div>
-                    <h3 className="text-xl font-serif font-bold text-moss-green mb-1">
-                      Módulo {module.id}: {module.title}
-                    </h3>
-                    <p className="text-dark-brown/70 text-sm">
-                      {module.lessons.length} aulas
-                    </p>
-                  </div>
+                  <button
+                    onClick={() => setExpandedModule(expandedModule === module.id ? null : module.id)}
+                    className="w-full flex items-center justify-between p-6 text-left hover:bg-moss-green/5 transition-colors duration-200"
+                  >
+                    <div>
+                      <h3 className="text-xl font-serif font-bold text-moss-green mb-1">
+                        Módulo {module.id}: {module.title}
+                      </h3>
+                      <p className="text-dark-brown/70 text-sm">
+                        {module.lessons.length} aulas
+                      </p>
+                    </div>
+                    
+                    {expandedModule === module.id ? (
+                      <ChevronUp className="w-5 h-5 text-mustard" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-mustard" />
+                    )}
+                  </button>
                   
-                  {expandedModule === module.id ? (
-                    <ChevronUp className="w-5 h-5 text-mustard" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-mustard" />
+                  {expandedModule === module.id && (
+                    <div className="px-6 pb-6 border-t border-moss-green/10">
+                      <ul className="space-y-3 mt-4">
+                        {module.lessons.map((lesson, index) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <CheckCircle className="w-5 h-5 text-mustard mt-0.5 flex-shrink-0" />
+                            <span className="text-dark-brown">{lesson}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
-                </button>
-                
-                {expandedModule === module.id && (
-                  <div className="px-6 pb-6 border-t border-moss-green/10">
-                    <ul className="space-y-3 mt-4">
-                      {module.lessons.map((lesson, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <CheckCircle className="w-5 h-5 text-mustard mt-0.5 flex-shrink-0" />
-                          <span className="text-dark-brown">{lesson}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Benefits */}
-      <section className="py-16 bg-moss-green/5">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
-              O Que Você Vai Receber
-            </h2>
-            <p className="text-lg text-dark-brown/80">
-              Todos os recursos para sua formação completa em apiterapia
-            </p>
+      {/* Benefits - Condicional */}
+      {showBenefitsSection && (
+        <section className="py-16 bg-moss-green/5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
+                O Que Você Vai Receber
+              </h2>
+              <p className="text-lg text-dark-brown/80">
+                {course.title === 'Terapia Respiratória Combinada (TRC)' 
+                  ? '+ 4 Bônus Exclusivos' 
+                  : 'Todos os recursos para sua formação completa'}
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {course.benefits.map((benefit, index) => (
+                <div
+                  key={index}
+                  className="bg-cream p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-moss-green/10"
+                >
+                  <CheckCircle className="w-8 h-8 text-mustard mb-4" />
+                  <p className="text-dark-brown font-medium">{benefit}</p>
+                </div>
+              ))}
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {course.benefits.map((benefit, index) => (
-              <div
-                key={index}
-                className="bg-cream p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-moss-green/10"
-              >
-                <CheckCircle className="w-8 h-8 text-mustard mb-4" />
-                <p className="text-dark-brown font-medium">{benefit}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* About Instructor */}
       <section className="py-16 bg-cream">
@@ -298,7 +299,7 @@ const CourseDetail = () => {
               
               <div className="prose prose-lg text-dark-brown leading-relaxed space-y-4">
                 <p>
-                  Especialista em terapias naturais com mais de 15 anos de experiência, 
+                  Especialista em terapias naturais com mais de 10 anos de experiência, 
                   Alexandre é reconhecido como uma das principais autoridades em apiterapia do Brasil.
                 </p>
                 
@@ -316,7 +317,7 @@ const CourseDetail = () => {
               <div className="flex flex-wrap gap-4 mt-8">
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Award className="w-5 h-5 text-mustard" />
-                  <span className="text-sm font-medium text-dark-brown">15+ Anos de Experiência</span>
+                  <span className="text-sm font-medium text-dark-brown">10+ Anos de Experiência</span>
                 </div>
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Users className="w-5 h-5 text-mustard" />
@@ -328,7 +329,7 @@ const CourseDetail = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-mustard/20 to-moss-green/20 rounded-2xl blur-xl"></div>
               <img
-                src="/api/placeholder/500/600"
+                src="/alexandre-.avif"
                 alt="Alexandre Gonçalves"
                 className="relative w-full h-[500px] object-cover rounded-2xl shadow-2xl"
               />
@@ -337,6 +338,39 @@ const CourseDetail = () => {
         </div>
       </section>
 
+      {/* Testimonials - Condicional */}
+      {showTestimonialsSection && (
+        <section className="py-16 bg-moss-green/5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
+                O Que Nossos Alunos Dizem
+              </h2>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {course.testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="bg-cream p-8 rounded-lg shadow-lg border border-moss-green/10"
+                >
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-mustard fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-dark-brown/90 leading-relaxed mb-4 italic">
+                    "{testimonial.text}"
+                  </p>
+                  <p className="font-bold text-moss-green">{testimonial.name}</p>
+                  <p className="text-sm text-dark-brown/70">{testimonial.role}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      
       {/* Final CTA */}
       <section className="py-16 bg-moss-green text-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

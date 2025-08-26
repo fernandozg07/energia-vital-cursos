@@ -1,8 +1,10 @@
-// src/pages/Home.tsx - CÓDIGO CORRIGIDO
+// src/pages/Home.tsx - CÓDIGO ATUALIZADO
 // - A seção de depoimentos foi reestruturada para ter um vídeo e 4 boxes de depoimento.
 // - Um novo depoimento foi adicionado.
 // - Os cursos em destaque foram atualizados para incluir o novo curso de TRC e remover os cursos antigos.
 // - O número de telefone do WhatsApp foi atualizado na seção Hero.
+// - O texto da seção 'Sobre Alexandre' foi ajustado com 10 anos de experiência e novas referências.
+// - O nome do curso de apiterapia foi simplificado para 'Apiterapia'.
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -13,7 +15,7 @@ const Home = () => {
   const courses = [
     {
       id: 1,
-      title: 'Apiterapia Completa',
+      title: 'Apiterapia', // Alterado de 'Apiterapia Completa' para 'Apiterapia'
       description: 'Curso completo sobre o uso terapêutico dos produtos da colmeia',
       duration: '40 horas',
       image: 'apiterapia.jpg',
@@ -24,7 +26,7 @@ const Home = () => {
       title: 'Terapia Respiratória Combinada (TRC)',
       description: 'Técnicas de respiração para controle da ansiedade e melhora da saúde',
       duration: '16 horas',
-      image: 'trc.png', // AQUI: Imagem para o novo curso de TRC
+      image: 'trc.png',
       slug: 'terapia-respiratoria-combinada'
     },
     {
@@ -74,7 +76,7 @@ const Home = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/acupuntura.jpg')`,
+            backgroundImage: `url('/trc.png')`,
           }}
         >
           <div className="absolute inset-0 bg-moss-green/70"></div>
@@ -136,7 +138,7 @@ const Home = () => {
               
               <div className="prose prose-lg text-dark-brown leading-relaxed">
                 <p>
-                  Com mais de 15 anos de experiência em terapias naturais, Alexandre Gonçalves 
+                  Com 10 anos de experiência em terapias naturais, Alexandre Gonçalves 
                   é reconhecido como um dos principais especialistas em apiterapia e acupuntura 
                   do Brasil.
                 </p>
@@ -151,12 +153,16 @@ const Home = () => {
                   Através da Energia Vital, já transformou a vida de mais de 3.000 pessoas, 
                   seja como pacientes ou como profissionais capacitados em suas técnicas únicas.
                 </p>
+                <p>
+                  Referências: EMBRAMEC, humaniversidade, IBreathwork
+                </p>
               </div>
               
               <div className="flex flex-wrap gap-4 pt-4">
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Award className="w-5 h-5 text-mustard" />
-                  <span className="text-sm font-medium text-dark-brown">15+ Anos de Experiência</span>
+                  {/* AQUI: O texto de experiência foi alterado */}
+                  <span className="text-sm font-medium text-dark-brown">10 Anos de Experiência</span>
                 </div>
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Users className="w-5 h-5 text-mustard" />
@@ -328,6 +334,7 @@ const Home = () => {
               </div>
               ))}
             </div>
+            
           </div>
         </div>
       </section>

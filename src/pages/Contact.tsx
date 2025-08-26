@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
 
-const Contact = () => {
+// This is the main React component for the Contact page.
+const App = () => {
+  // State to manage the form data.
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,17 +12,24 @@ const Contact = () => {
     message: ''
   });
 
+  // Handle form submission. It will open a WhatsApp chat with a pre-filled message.
+  // Explicitly typing the event parameter to resolve the TypeScript error.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aqui você enviaria os dados para seu backend
+    // For now, we'll log the form data and then redirect to WhatsApp.
     console.log('Form submitted:', formData);
-    
-    // AQUI: O número de telefone do WhatsApp foi atualizado
-    const whatsappMessage = `Olá Alexandre! Meu nome é ${formData.name}. ${formData.message}`;
+
+    // Construct the WhatsApp message with user's name, subject, and message.
+    const whatsappMessage = `Olá Alexandre! Meu nome é ${formData.name}. Assunto: ${formData.subject}. Mensagem: ${formData.message}`;
+    // Construct the full WhatsApp URL.
     const whatsappUrl = `https://wa.me/5511999997316?text=${encodeURIComponent(whatsappMessage)}`;
+    
+    // Open the WhatsApp URL in a new window.
     window.open(whatsappUrl, '_blank');
   };
 
+  // Handle changes in form inputs.
+  // Explicitly typing the event parameter to resolve the TypeScript error.
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
@@ -38,7 +47,7 @@ const Contact = () => {
               Entre em Contato
             </h1>
             <p className="text-xl text-dark-brown/80 max-w-3xl mx-auto mb-8">
-              Estou aqui para esclarecer suas dúvidas, orientar sobre nossos cursos 
+              Estou aqui para esclarecer suas dúvidas, orientar sobre nossos cursos
               e ajudá-lo a dar o primeiro passo na sua jornada das terapias naturais
             </p>
             
@@ -129,7 +138,7 @@ const Contact = () => {
                       Atendimento presencial e online
                     </p>
                     <p className="text-mustard font-medium">
-                      São Paulo - SP, Brasil
+                      Mairiporã - SP, Brasil
                     </p>
                   </div>
                 </div>
@@ -142,11 +151,7 @@ const Contact = () => {
                     <h3 className="text-xl font-serif font-bold text-moss-green mb-2">
                       Horário de Atendimento
                     </h3>
-                    <div className="space-y-1 text-dark-brown/80">
-                      <p>Segunda a Sexta: 9h às 18h</p>
-                      <p>Sábado: 9h às 14h</p>
-                      <p>Domingo: Apenas emergências</p>
-                    </div>
+                    <p className="text-dark-brown/80">Atendimento somente agendado.</p>
                   </div>
                 </div>
               </div>
@@ -288,9 +293,7 @@ const Contact = () => {
                 Como funcionam os cursos?
               </h3>
               <p className="text-dark-brown/80 leading-relaxed">
-                Nossos cursos combinam teoria e prática, com aulas presenciais em São Paulo 
-                e material de apoio digital. Cada curso inclui certificado, material didático 
-                e suporte vitalício do instrutor.
+                Nossos cursos foram criados para combinar o melhor da teoria e da prática. As aulas presenciais são realizadas em Mairiporã, SP, e complementadas com material de apoio digital completo. Cada curso inclui certificado de conclusão, material didático e suporte direto do instrutor no grupo de alunos.
               </p>
             </div>
 
@@ -299,8 +302,8 @@ const Contact = () => {
                 Preciso de formação prévia na área da saúde?
               </h3>
               <p className="text-dark-brown/80 leading-relaxed">
-                Não é obrigatório, mas é recomendado. Nossos cursos são adaptados tanto para 
-                profissionais da saúde quanto para pessoas interessadas em iniciar uma nova carreira. 
+                Não é obrigatório, mas é recomendado. Nossos cursos são adaptados tanto para
+                profissionais da saúde quanto para pessoas interessadas em iniciar uma nova carreira.
                 O importante é ter dedicação e interesse genuíno pelas terapias naturais.
               </p>
             </div>
@@ -310,8 +313,8 @@ const Contact = () => {
                 Os certificados são reconhecidos?
               </h3>
               <p className="text-dark-brown/80 leading-relaxed">
-                Sim, nossos certificados são válidos para comprovação de horas complementares 
-                e capacitação profissional. Para atendimento clínico, é necessário verificar 
+                Sim, nossos certificados são válidos para comprovação de horas complementares
+                e capacitação profissional. Para atendimento clínico, é necessário verificar
                 a regulamentação local de cada município.
               </p>
             </div>
@@ -321,8 +324,8 @@ const Contact = () => {
                 Qual é a forma de pagamento?
               </h3>
               <p className="text-dark-brown/80 leading-relaxed">
-                Oferecemos diversas opções: à vista com desconto, parcelamento no cartão de crédito 
-                em até 12 vezes, PIX e transferência bancária. Entre em contato para conhecer 
+                Oferecemos diversas opções: à vista com desconto, parcelamento no cartão de crédito
+                em até 12 vezes, PIX e transferência bancária. Entre em contato para conhecer
                 as condições especiais disponíveis.
               </p>
             </div>
@@ -338,7 +341,7 @@ const Contact = () => {
           </h2>
           
           <p className="text-xl text-cream/90 mb-8 max-w-2xl mx-auto">
-            A jornada das terapias naturais começa com uma conversa. 
+            A jornada das terapias naturais começa com uma conversa.
             Entre em contato e vamos planejar juntos seu futuro profissional.
           </p>
           
@@ -361,4 +364,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default App;
