@@ -5,7 +5,7 @@ import { Clock, Users, Award, CheckCircle, ChevronDown, ChevronUp, Play, Message
 const coursesData = [
   {
     slug: 'apiterapia-completa',
-    title: 'Apiterapia Completa',
+    title: 'Apiterapia ',
     subtitle: 'Curso Profissionalizante',
     description: 'Curso completo sobre o uso terapêutico dos produtos da colmeia. Aprenda sobre mel, própolis, geleia real, pólen e veneno de abelha com metodologia prática e científica.',
     duration: '40 horas',
@@ -80,6 +80,51 @@ const coursesData = [
     benefits: [],
     testimonials: []
   },
+  {
+    slug: 'auriculoterapia',
+    title: 'Auriculoterapia',
+    subtitle: 'Curso Completo',
+    description: 'Aprenda a técnica milenar da Auriculoterapia para tratar dores, doenças e distúrbios emocionais através de pontos específicos na orelha.',
+    duration: '20 horas',
+    students: '100+',
+    level: 'Iniciante',
+    image: '/auriculoterapia.jpg',
+    videoUrl: 'http://googleusercontent.com/youtube.com/auriculoterapia-video',
+    instructor: 'Alexandre Gonçalves',
+    price: 'A consultar',
+    installments: 'Fale conosco',
+    modules: [
+      { 
+        id: 1, 
+        title: 'Módulos de Auriculoterapia', 
+        lessons: [
+          'Introdução',
+          'História da Auriculoterapia',
+          'Utilização da técnica',
+          'Fundamentos',
+          'Anatomia do Pavilhão',
+          'Diagnóstico',
+          'Correspondência Auricular',
+          'Distribuição e classificação dos pontos',
+          'Pontos da área correspondente',
+          'Mapa auricular',
+          'Estrutura anatômica',
+          'Localização e função dos pontos',
+          'Mapa Auricular Francês',
+          'Materiais e métodos',
+          'Massagem Auricular',
+          'Sangria Auricular',
+          'Estimuladores esféricos',
+          'Materiais',
+          'Considerações gerais',
+          'Consulta em Auriculoterapia',
+          'Considerações finais'
+        ] 
+      }
+    ],
+    benefits: [],
+    testimonials: []
+  }
 ];
 
 const CourseDetail = () => {
@@ -205,7 +250,7 @@ const CourseDetail = () => {
                 Conteúdo Programático
               </h2>
               <p className="text-lg text-dark-brown/80">
-                {course.modules.length} módulos completos com teoria e prática
+                {course.modules.length} {course.modules.length > 1 ? 'módulos completos' : 'módulo completo'} com teoria e prática
               </p>
             </div>
             
@@ -221,7 +266,7 @@ const CourseDetail = () => {
                   >
                     <div>
                       <h3 className="text-xl font-serif font-bold text-moss-green mb-1">
-                        Módulo {module.id}: {module.title}
+                        {course.slug === 'auriculoterapia' ? '' : `Módulo ${module.id}: `}{module.title}
                       </h3>
                       <p className="text-dark-brown/70 text-sm">
                         {module.lessons.length} aulas
