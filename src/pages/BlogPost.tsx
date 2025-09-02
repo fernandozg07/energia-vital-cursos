@@ -9,17 +9,14 @@ const blogPosts = [
     // O slug é a parte da URL que identifica o post (ex: /blog/beneficios-cientificos-apiterapia)
     slug: 'beneficios-cientificos-apiterapia',
     title: 'Os Benefícios Científicos da Apiterapia: O Que Dizem as Pesquisas',
-    author: 'Alexandre Gonçalves',
-    // Caminho da imagem local corrigido para o nome do arquivo e adicionado '/' para referenciar a pasta pública
-    // Alterado para uma URL pública para garantir o funcionamento
-    // A imagem local "alexandre-.avif" não pode ser carregada neste ambiente,
-    // então um placeholder público foi usado no lugar.
-    authorImage: 'https://placehold.co/100x100/A8A179/323F30?text=AG',
+    author: 'Alexandre',
+    // Imagem do autor atualizada com a URL da foto que você enviou
+    authorImage: '/alexandre-.avif',
     date: '15 de Janeiro, 2024',
     category: 'Apiterapia',
     readTime: '10 min de leitura',
     excerpt: 'A apiterapia, ou terapia com produtos das abelhas, tem ganhado cada vez mais reconhecimento científico nos últimos anos. O que antes era considerado apenas medicina tradicional, hoje conta com dezenas de estudos científicos que comprovam seus benefícios terapêuticos.',
-    image: 'https://placehold.co/1200x600/D9D8C6/323F30?text=Apiterapia+e+Abelhas',
+    image: 'uploaded:image_14aa3d.jpg-69016914-ba17-43dc-9264-1e4b11fed0dc',
     content: `
       <p>A apiterapia, o uso medicinal dos produtos da colmeia, como mel, própolis, geleia real e veneno de abelha, tem evoluído de uma prática tradicional para uma disciplina de pesquisa robusta. A ciência moderna está desvendando os mecanismos por trás dos seus efeitos, validando o conhecimento ancestral e abrindo novos caminhos para a medicina.</p>
       <h2>A Comprovação Científica por Produto</h2>
@@ -63,15 +60,14 @@ const blogPosts = [
   {
     slug: 'mel-e-imunidade',
     title: 'Mel e Imunidade: Como Fortalecer a Saúde no Inverno',
-    author: 'Alexandre Gonçalves',
-    // A imagem local "alexandre-.avif" não pode ser carregada neste ambiente,
-    // então um placeholder público foi usado no lugar.
-    authorImage: 'https://placehold.co/100x100/A8A179/323F30?text=AG',
+    author: 'Alexandre',
+    // Imagem do autor atualizada com a URL da foto que você enviou
+    authorImage: 'uploaded:image_14aa3d.jpg-69016914-ba17-43dc-9264-1e4b11fed0dc',
     date: '22 de Junho, 2024',
     category: 'Imunologia',
     readTime: '7 min de leitura',
     excerpt: 'O mel não é apenas um adoçante natural, mas um poderoso aliado para a sua saúde, especialmente durante as estações mais frias. Descubra como o mel pode impulsionar seu sistema imunológico.',
-    image: 'https://placehold.co/1200x600/C4B78A/5C4033?text=Mel+e+Imunidade',
+    image: 'uploaded:image_14aa3d.jpg-69016914-ba17-43dc-9264-1e4b11fed0dc',
     content: `
       <p>O mel é um alimento funcional que tem sido usado há séculos na medicina popular para tratar resfriados e dores de garganta. A ciência agora valida essas práticas, identificando compostos e mecanismos que reforçam sua eficácia no fortalecimento do sistema imunológico.</p>
       <h2>Ação Antioxidante e Anti-inflamatória</h2>
@@ -97,22 +93,21 @@ const blogPosts = [
   {
     slug: 'geleia-real-superalimento',
     title: 'Geleia Real: O Superalimento que as Abelhas Produzem',
-    author: 'Alexandre Gonçalves',
-    // A imagem local "alexandre-.avif" não pode ser carregada neste ambiente,
-    // então um placeholder público foi usado no lugar.
-    authorImage: 'https://placehold.co/100x100/A8A179/323F30?text=AG',
+    author: 'Alexandre',
+    // Imagem do autor atualizada com a URL da foto que você enviou
+    authorImage: 'uploaded:image_14aa3d.jpg-69016914-ba17-43dc-9264-1e4b11fed0dc',
     date: '10 de Maio, 2024',
     category: 'Nutrição',
     readTime: '8 min de leitura',
     excerpt: 'Produzida pelas abelhas operárias, a geleia real é o alimento exclusivo da abelha rainha, responsável por sua longevidade e fertilidade. Descubra o que torna este produto tão especial para a saúde humana.',
-    image: 'https://placehold.co/1200x600/F2E9E4/A8A179?text=Geleia+Real',
+    image: 'uploaded:image_14aa3d.jpg-69016914-ba17-43dc-9264-1e4b11fed0dc',
     content: `
       <p>A geleia real é uma substância leitosa e viscosa, secretada pelas glândulas hipofaríngeas das abelhas operárias. É o alimento exclusivo da abelha rainha durante toda a sua vida, o que explica sua incrível longevidade e sua capacidade de reprodução. Esta composição única tem despertado o interesse da ciência para entender como seus benefícios podem ser transferidos para a saúde humana.</p>
       <h2>Composição Química e Biológica</h2>
       <p>A geleia real é uma complexa matriz de nutrientes, contendo água (60-70%), açúcares, proteínas, lipídios, vitaminas do complexo B (especialmente B5 e B7) e oligoelementos. No entanto, seus componentes mais ativos e únicos são:</p>
       <ul>
         <li><strong>Ácido 10-HDA (Ácido 10-hidroxi-2-decenoico):</strong> Este é um ácido graxo exclusivo da geleia real, considerado um marcador de qualidade. O 10-HDA demonstrou em estudos ter atividade antitumoral, anti-inflamatória e imunomoduladora. Ele ajuda a inibir a angiogênese (formação de novos vasos sanguíneos que alimentam tumores) e a induzir a apoptose (morte celular programada) em células cancerígenas.</li>
-        <li><strong>Royalactina:</strong> Descoberta em 2011, esta proteína é o componente-chave que diferencia uma larva em abelha rainha. Em humanos, a royalactina e outros peptídeos menores, como a roialisin, têm sido estudados por suas propriedades neurotróficas, que podem promover a saúde e a plasticidade neuronal, além de suas ações antimicrobianas.</li>
+        <li><strong>Royalactina:</strong> Descoberta em 2011, esta proteína é o componente-chave que diferencia uma larva em abelha rainha. Em humanos, essa proteína e outros peptídeos menores, como a roialisin, têm sido estudados por suas propriedades neurotróficas, que podem promover a saúde e a plasticidade neuronal, além de suas ações antimicrobianas.</li>
       </ul>
       <h2>Benefícios Apoiados por Pesquisas</h2>
       <ul>
@@ -169,6 +164,15 @@ const BlogList = () => {
                 <h3 className="text-xl font-serif font-bold text-moss-green group-hover:text-mustard transition-colors duration-300">
                   {post.title}
                 </h3>
+                {/* Imagem e nome do autor adicionados à lista de posts */}
+                <div className="flex items-center gap-3 mt-4">
+                  <img
+                    src={post.authorImage}
+                    alt={post.author}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <span className="text-sm font-medium text-dark-brown">{post.author}</span>
+                </div>
                 <p className="text-dark-brown/80 mt-2 text-base line-clamp-3">
                   {post.excerpt}
                 </p>
@@ -319,9 +323,7 @@ const BlogPost = () => {
                 </p>
 
                 <p className="text-dark-brown/80 leading-relaxed mb-6">
-                  Com mais de 15 anos de experiência em terapias naturais, {post.author} é reconhecido
-                  como uma das principais autoridades em apiterapia do Brasil. Através de seus cursos
-                  e atendimentos, já transformou a vida de mais de 3.000 pessoas.
+                  Descubra o poder da natureza para curar e equilibrar seu bem-estar. Com 15 anos de experiência em terapias naturais e mais de 3.000 histórias de transformação, ofereço cursos especializados em Apiterapia, Ventosa Terapia, Auriculoterapia e Terapia Respiratória Combinada (TRC). Aprenda com um especialista experiente e desenvolva habilidades para promover saúde e qualidade de vida. Explore nossos cursos e venha fazer parte dessa jornada de cura e autoconhecimento!
                 </p>
 
                 <div className="flex gap-4">

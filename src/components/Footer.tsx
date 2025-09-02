@@ -26,7 +26,7 @@ const Footer = () => {
             
             <p className="text-cream/80 leading-relaxed mb-6 max-w-md">
               Transformando vidas através do conhecimento das terapias naturais. 
-              Mais de 10 anos dedicados ao ensino e prática da apiterapia e acupuntura.
+              Mais de 15 anos dedicados ao ensino e prática da apiterapia e acupuntura.
             </p>
             
             <div className="flex flex-col gap-3">
