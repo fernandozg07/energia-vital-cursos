@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Users, BookOpen, Award, ChevronRight } from 'lucide-react';
+import { Star, Users, BookOpen, Award, ChevronRight, ChevronLeft } from 'lucide-react'; // Importe ChevronLeft também
+import { Carousel } from 'react-responsive-carousel'; // Importe o componente Carousel
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Importe os estilos do carrossel
 
 const Home = () => {
   // AQUI: A lista de cursos em destaque foi atualizada
@@ -59,13 +61,20 @@ const Home = () => {
     }
   ];
 
+  // AQUI: Lista dos IDs dos vídeos do YouTube para o carrossel
+  const youtubeVideoIds = [
+    "https://www.youtube.com/watch?v=z36tPT9_o_I", // Substitua pelo ID do seu primeiro vídeo
+    "https://www.youtube.com/watch?v=sL8HM6ks8Uk", // Substitua pelo ID do seu segundo vídeo
+    "https://www.youtube.com/watch?v=GXTohwuDZg0", // Substitua pelo ID do seu terceiro vídeo
+  ];
+
   return (
     <div className="bg-cream">
       {/* O Header é renderizado em App.tsx, então não precisa aqui */}
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('/trc.png')`,
@@ -73,20 +82,20 @@ const Home = () => {
         >
           <div className="absolute inset-0 bg-moss-green/70"></div>
         </div>
-        
+
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-cream mb-6 leading-tight">
             Energia Vital
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-cream/90 mb-4 font-medium">
             Apiterapia & Acupuntura
           </p>
-          
+
           <p className="text-lg md:text-xl text-cream/80 mb-12 max-w-2xl mx-auto leading-relaxed">
             Conhecimento que Transforma Vidas e Profissionais
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/cursos"
@@ -112,12 +121,12 @@ const Home = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-mustard/20 to-moss-green/20 rounded-2xl blur-xl"></div>
               <img
-                src="alexandre-.avif"
+                src="ale.jpg"
                 alt="Alexandre Gonçalves"
                 className="relative w-full h-[500px] object-cover rounded-2xl shadow-2xl object-top"
               />
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <h2 className="text-4xl md:text-5xl font-serif font-bold text-moss-green mb-4">
@@ -127,18 +136,18 @@ const Home = () => {
                   Especialista em Terapias Naturais
                 </p>
               </div>
-              
+
               {/* AQUI: O texto da seção 'Sobre' foi totalmente substituído */}
               <div className="prose prose-lg text-dark-brown leading-relaxed">
                 <p>
                   Descubra o poder da natureza para curar e equilibrar seu bem-estar. Com 15 anos de experiência em terapias naturais e mais de 3000 histórias de transformação, ofereço cursos especializados em Apiterapia, Ventosa Terapia, Auriculoterapia e Terapia Respiratória Combinada (TRC).
                 </p>
-                
+
                 <p>
                   Aprenda com um especialista experiente e desenvolva habilidades para promover saúde e qualidade de vida. Explore nossos cursos e venha fazer parte dessa jornada de cura e autoconhecimento!
                 </p>
               </div>
-              
+
               <div className="flex flex-wrap gap-4 pt-4">
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Award className="w-5 h-5 text-mustard" />
@@ -166,7 +175,7 @@ const Home = () => {
               Os valores que guiam nossa missão de transformar vidas através do conhecimento
             </p>
           </div>
-          
+
           {/* AQUI: O conteúdo de cada pilar foi totalmente substituído */}
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-moss-green/10">
@@ -178,7 +187,7 @@ const Home = () => {
                 Transformar vidas através do poder das terapias naturais, promovendo saúde, equilíbrio e bem-estar.
               </p>
             </div>
-            
+
             <div className="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-moss-green/10">
               <div className="w-16 h-16 bg-mustard rounded-full flex items-center justify-center mb-6">
                 <Award className="w-8 h-8 text-cream" />
@@ -188,7 +197,7 @@ const Home = () => {
                 Compassividade, Respeito, Integridade e Empoderamento. Acreditamos que cada pessoa tem o potencial para se curar e crescer.
               </p>
             </div>
-            
+
             <div className="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-moss-green/10">
               <div className="w-16 h-16 bg-moss-green rounded-full flex items-center justify-center mb-6">
                 <Users className="w-8 h-8 text-cream" />
@@ -213,7 +222,7 @@ const Home = () => {
               Transforme sua carreira com nossos cursos especializados em terapias naturais
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {courses.map((course) => (
               <div
@@ -230,7 +239,7 @@ const Home = () => {
                     {course.duration}
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <h3 className="text-xl font-serif font-bold text-moss-green mb-3">
                     {course.title}
@@ -238,7 +247,7 @@ const Home = () => {
                   <p className="text-dark-brown/80 mb-6 leading-relaxed">
                     {course.description}
                   </p>
-                  
+
                   <Link
                     to={`/curso/${course.slug}`}
                     className="inline-flex items-center gap-2 text-mustard hover:text-mustard/80 font-medium transition-colors duration-200"
@@ -250,7 +259,7 @@ const Home = () => {
               </div>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link
               to="/cursos"
@@ -262,7 +271,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Depoimentos - Seção REESTRUTURADA */}
+      {/* Depoimentos - Seção REESTRUTURADA com Carrossel de Vídeos */}
       <section className="py-20 bg-moss-green/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -273,22 +282,57 @@ const Home = () => {
               Histórias reais de transformação e sucesso profissional
             </p>
           </div>
-          
-          {/* AQUI: Nova estrutura com grid de duas colunas */}
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Lado Esquerdo: Vídeo */}
+            {/* Lado Esquerdo: Carrossel de Vídeos do YouTube */}
             <div className="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/SUA_ID_DO_VIDEO" // Substitua SUA_ID_DO_VIDEO pelo ID do seu vídeo do YouTube
-                title="Depoimento de Alunos Energia Vital"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              <Carousel
+                showArrows={true}
+                showStatus={false}
+                showIndicators={true}
+                showThumbs={false}
+                infiniteLoop={true}
+                renderArrowPrev={(onClickHandler, hasPrev, label) =>
+                  hasPrev && (
+                    <button
+                      type="button"
+                      onClick={onClickHandler}
+                      title={label}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-moss-green/50 hover:bg-moss-green text-cream rounded-full ml-2"
+                    >
+                      <ChevronLeft className="w-6 h-6" />
+                    </button>
+                  )
+                }
+                renderArrowNext={(onClickHandler, hasNext, label) =>
+                  hasNext && (
+                    <button
+                      type="button"
+                      onClick={onClickHandler}
+                      title={label}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-moss-green/50 hover:bg-moss-green text-cream rounded-full mr-2"
+                    >
+                      <ChevronRight className="w-6 h-6" />
+                    </button>
+                  )
+                }
+              >
+                {youtubeVideoIds.map((videoId, index) => (
+                  <div key={index} className="w-full h-full">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      title={`Depoimento de Aluno ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ))}
+              </Carousel>
             </div>
-            
+
             {/* Lado Direito: Depoimentos Escritos */}
             <div className="grid sm:grid-cols-2 gap-8">
               {testimonials.map((testimonial, index) => (
@@ -301,11 +345,11 @@ const Home = () => {
                       <Star key={i} className="w-4 h-4 text-mustard fill-current" />
                     ))}
                   </div>
-                  
+
                   <p className="text-dark-brown/90 leading-relaxed mb-4 italic text-sm">
                     "{testimonial.text}"
                   </p>
-                  
+
                   <div>
                     <h4 className="font-medium text-moss-green text-base">{testimonial.name}</h4>
                     <p className="text-xs text-dark-brown/70">{testimonial.role}</p>
@@ -313,7 +357,7 @@ const Home = () => {
                 </div>
               ))}
             </div>
-            
+
           </div>
         </div>
       </section>
@@ -329,7 +373,7 @@ const Home = () => {
               Artigos, dicas e conhecimentos sobre terapias naturais,
               apiterapia e acupuntura direto do especialista
             </p>
-            
+
             <Link
               to="/blog"
               className="bg-mustard hover:bg-mustard/90 text-dark-brown px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105"
