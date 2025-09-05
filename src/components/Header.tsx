@@ -1,5 +1,4 @@
-// src/components/Header.tsx - CÓDIGO CORRIGIDO
-// - A borda amarela foi removida do logo.
+// src/components/Header.tsx - CÓDIGO FINAL E OTIMIZADO PARA LOGO HORIZONTAL
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -23,18 +22,16 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 py-4"> 
           <Link to="/" className="flex items-center">
-            {/* AQUI: As classes de borda foram removidas desta div */}
-            <div className="w-10 h-10 rounded-full overflow-hidden">
+            {/* Div para exibir o logo horizontal */}
+            {/* Altura do logo ajustada para 70px em telas pequenas e 80px em telas grandes */}
+            <div className="h-[70px] md:h-20"> {/* ALTERADO AQUI: Altura customizada h-[70px] */}
               <img
-                src="/logo.jpg" 
+                src="/LogoEnergiaVital_VersaoHorizontal_RGB_Cores.png" // Garanta que este arquivo esteja na pasta 'public'
                 alt="Energia Vital Logo"
-                className="w-full h-full object-cover"
+                className="h-full object-contain" // 'object-contain' garante que a imagem inteira seja visível sem cortar
               />
             </div>
-            <div className="ml-2 hidden md:block">
-              <h3 className="text-lg font-serif font-bold text-dark-brown leading-none">Energia Vital</h3>
-              <p className="text-xs text-dark-brown/70 leading-none">Apiterapia & Acupuntura</p>
-            </div>
+            {/* O bloco de texto duplicado foi REMOVIDO daqui */}
           </Link>
 
           {/* Desktop Navigation */}
