@@ -24,7 +24,7 @@ const coursesData = [
       { id: 5, title: 'Medicina Tradicional Chinesa', lessons: ['O que é MTC?', 'Patologias na MTC', 'Teoria de Yin e Yang', 'Órgãos e Vísceras', '5 Elementos', 'Canais e Colaterais - Meridianos', 'Localização de Pontos', 'Técnica dos Pontos Alarme', 'Técnica Bei Shu', 'Técnica Tonificação e Sedação', 'Moxabustão', 'Auriculoterapia na Apiterapia', 'Diagnóstico de Língua e Pulso', 'Anamnese'] },
       { id: 6, title: 'Enfermidades e Tratamentos', lessons: ['Dores Crônicas', 'Doenças Autoimunes', 'Doenças Emocionais', 'Disfunções Hormonais', 'Técnicas de Aplicação de Apitoxina', 'Posologia produtos'] },
       { id: 7, title: 'Segurança e Anafilaxia', lessons: ['Molecular', 'Componentes', 'Efeitos no Organismo Humano', 'Anafilaxia', 'Segurança Clínica'] },
-      { id: 8, title: 'Ambulatório', lessons: ['Prática', 'Estudos de Casos', 'Avaliação', 'Entrega de certificados'] }
+      { id: 8, title: 'Ambulatório Presencial', lessons: ['Prática','Aula Presencial', 'Estudos de Casos', 'Avaliação', 'Entrega de certificados'] }
     ],
     benefits: [
       'Aulas gravadas com acesso por 1 ano',
@@ -94,9 +94,9 @@ const coursesData = [
     price: 'A consultar',
     installments: 'Fale conosco',
     modules: [
-      { 
-        id: 1, 
-        title: 'Módulos de Auriculoterapia', 
+      {
+        id: 1,
+        title: 'Módulos de Auriculoterapia',
         lessons: [
           'Introdução',
           'História da Auriculoterapia',
@@ -118,7 +118,7 @@ const coursesData = [
           'Considerações gerais',
           'Consulta em Auriculoterapia',
           'Considerações finais'
-        ] 
+        ]
       }
     ],
     benefits: [],
@@ -159,11 +159,11 @@ const CourseDetail = () => {
               <h1 className="text-4xl md:text-5xl font-serif font-bold text-moss-green mb-6 mt-2">
                 {course.title}
               </h1>
-              
+
               <p className="text-xl text-dark-brown/80 mb-8 leading-relaxed">
                 {course.description}
               </p>
-              
+
               <div className="flex flex-wrap gap-6 mb-8">
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-mustard" />
@@ -178,7 +178,7 @@ const CourseDetail = () => {
                   <span className="text-dark-brown font-medium">{course.level}</span>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href={whatsappUrl}
@@ -194,7 +194,7 @@ const CourseDetail = () => {
                 </button>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-mustard/20 to-moss-green/20 rounded-2xl blur-xl"></div>
               <div className="relative bg-cream rounded-2xl overflow-hidden shadow-2xl">
@@ -222,11 +222,19 @@ const CourseDetail = () => {
               <div>
                 <p className="text-cream/80 mb-2">Investimento no seu futuro profissional:</p>
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold">{course.price}</span>
+                  {/* ALTERAÇÃO AQUI */}
+                  {course.slug === 'apiterapia-completa' ? (
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-lg font-medium text-cream/80">12x de</span>
+                      <span className="text-3xl font-bold text-white">R$ 323,20</span>
+                    </div>
+                  ) : (
+                    <span className="text-3xl font-bold">{course.price}</span>
+                  )}
                   <span className="text-cream/80">ou {course.installments}</span>
                 </div>
               </div>
-              
+
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -252,7 +260,7 @@ const CourseDetail = () => {
                 {course.modules.length} {course.modules.length > 1 ? 'módulos completos' : 'módulo completo'} com teoria e prática
               </p>
             </div>
-            
+
             <div className="space-y-4">
               {course.modules.map((module) => (
                 <div
@@ -271,14 +279,14 @@ const CourseDetail = () => {
                         {module.lessons.length} aulas
                       </p>
                     </div>
-                    
+
                     {expandedModule === module.id ? (
                       <ChevronUp className="w-5 h-5 text-mustard" />
                     ) : (
                       <ChevronDown className="w-5 h-5 text-mustard" />
                     )}
                   </button>
-                  
+
                   {expandedModule === module.id && (
                     <div className="px-6 pb-6 border-t border-moss-green/10">
                       <ul className="space-y-3 mt-4">
@@ -294,7 +302,7 @@ const CourseDetail = () => {
                 </div>
               ))}
             </div>
-            </div>
+          </div>
         </section>
       )}
 
@@ -307,12 +315,12 @@ const CourseDetail = () => {
                 O Que Você Vai Receber
               </h2>
               <p className="text-lg text-dark-brown/80">
-                {course.title === 'Terapia Respiratória Combinada (TRC)' 
-                  ? '+ 4 Bônus Exclusivos' 
+                {course.title === 'Terapia Respiratória Combinada (TRC)'
+                  ? '+ 4 Bônus Exclusivos'
                   : 'Todos os recursos para sua formação completa'}
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {course.benefits.map((benefit, index) => (
                 <div
@@ -324,7 +332,7 @@ const CourseDetail = () => {
                 </div>
               ))}
             </div>
-          </div>
+            </div>
         </section>
       )}
 
@@ -336,25 +344,25 @@ const CourseDetail = () => {
               <h2 className="text-3xl md:text-4xl font-serif font-bold text-moss-green mb-6">
                 Seu Instrutor
               </h2>
-              
+
               <h3 className="text-2xl font-serif font-bold text-mustard mb-4">
                 Alexandre Gonçalves
               </h3>
-              
+
               <div className="prose prose-lg text-dark-brown leading-relaxed space-y-4">
                 <p>
                   Descubra o poder da natureza para curar e equilibrar seu bem-estar. Com 15 anos de experiência em terapias naturais e mais de 3000 histórias de transformação, ofereço cursos especializados em Apiterapia, Ventosa Terapia, Auriculoterapia e Terapia Respiratória Combinada (TRC).
                 </p>
-                
+
                 <p>
                   Aprenda com um especialista experiente e desenvolva habilidades para promover saúde e qualidade de vida.
                 </p>
-                
+
                 <p>
                   Explore nossos cursos e venha fazer parte dessa jornada de cura e autoconhecimento!
                 </p>
               </div>
-              
+
               <div className="flex flex-wrap gap-4 mt-8">
                 <div className="flex items-center gap-2 bg-moss-green/10 px-4 py-2 rounded-full">
                   <Award className="w-5 h-5 text-mustard" />
@@ -366,7 +374,7 @@ const CourseDetail = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-mustard/20 to-moss-green/20 rounded-2xl blur-xl"></div>
               <img
@@ -388,7 +396,7 @@ const CourseDetail = () => {
                 O Que Nossos Alunos Dizem
               </h2>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               {course.testimonials.map((testimonial, index) => (
                 <div
@@ -411,19 +419,19 @@ const CourseDetail = () => {
           </div>
         </section>
       )}
-      
+
       {/* Final CTA */}
       <section className="py-16 bg-moss-green text-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
             Pronto para Transformar sua Carreira?
           </h2>
-          
+
           <p className="text-xl text-cream/90 mb-8 max-w-2xl mx-auto">
-            Não perca a oportunidade de se especializar em uma das terapias naturais 
+            Não perca a oportunidade de se especializar em uma das terapias naturais
             mais procuradas do mercado. Vagas limitadas!
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={whatsappUrl}
@@ -434,12 +442,12 @@ const CourseDetail = () => {
               <MessageCircle className="w-5 h-5" />
               Quero Falar com Alexandre
             </a>
-            
+
             <button className="border-2 border-cream hover:bg-cream hover:text-moss-green text-cream px-8 py-4 rounded-full font-medium text-lg transition-all duration-300">
               Tirar Dúvidas
             </button>
           </div>
-          
+
           <p className="text-sm text-cream/70 mt-6">
             💬 Resposta em até 2 horas • 📱 Atendimento via WhatsApp
           </p>
